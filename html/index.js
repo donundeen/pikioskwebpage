@@ -62,6 +62,35 @@ $(function() {
             }
         }
 
+        // try parsing a json object into a series of javascript function calls. maybe it will work?
+        if(msg.address == "/screen/p5json"){
+            let p5json = msg.data.p5json;
+            let farray=[];
+            for(let i = 0 ; i< p5json.length; i++){
+                let func = p5json[i];
+                let fname = func.f;
+                let argarray = [];
+                for(let j = 0; j < func.args.length; j++){
+                    let arg = func.args[j];
+                    if(typeof arg === "String"){
+                        argarray.push( "'"+arg+"'");
+                    }else{
+                        argarray.push(arg);
+                    }
+                }
+                let argstring = argarry.join(", ");
+                fstring = fname+"("+argstring+");"
+                farray.push(fstring);
+            }
+            let p5code = farray.join("\n");
+            try{
+                eval(p5code);
+            }catch(e){
+                console.log("p5json error", e);
+                let msg = {msg : e.message, p5code: p5code, p5json : p5json, address : "p5error"};
+                message("toadminmessage", msg);
+            }            
+        }
 
     }
 
