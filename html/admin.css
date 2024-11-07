@@ -1,0 +1,13 @@
+.item {
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.errormsg {
+    color: red;
+}
+
+.responsemsg {
+    color: greeen;
+}

@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <script src="./jquery-3.7.1.min.js" defer></script>
+        <script src="./jquery-ui.js" defer></script>
+        <script src="./admin.js" defer></script>
+        <link rel="stylesheet" href="./admin.css">
+        <link rel="stylesheet" href="./jquery-ui.css">
+        <link rel="stylesheet" href="./jquery-ui.theme.css">
+    </head>
+    <body>
+        screen admin
+        <div class="container">
+            <div class="item sendtext">
+                <strong>Send Text</strong><BR>
+                <input type="text" class="data text" name="text" size="20">
+                <input type="hidden" class="address" value="/screen/text"><BR>
+                <button class="sendmessage">send</button>
+            </div>
+        </div>
+        <div class="container">
+            <div class="item p5">
+                <strong>Send P5.js</strong><BR>
+                <textarea rows="10" cols="50" class="data p5" name="p5" size="20"></textarea> 
+                <input type="hidden" class="address" value="/screen/p5"><BR>
+                <button class="sendmessage">send</button>
+                <BR>
+                <span class="errormsg p5Error"></span>
+            </div>
+        </div>
+    </body>
+</html>

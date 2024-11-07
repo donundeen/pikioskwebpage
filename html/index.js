@@ -47,6 +47,21 @@ $(function() {
             screenText(msg.data);
 
         }
+        if(msg.address == "/screen/p5"){
+            console.log(msg);
+            // Draw square
+            // x, y, size
+            let p5 = msg.data.p5;
+          //  square(40, 100, 200);
+            try{
+                eval(p5);
+            }catch(e){
+                console.log("p5 error", e);
+                let msg = {msg : e.message, p5code: p5, address : "p5error"};
+                message("toadminmessage", msg);
+            }
+        }
+
 
     }
 
@@ -70,4 +85,21 @@ $(function() {
     }
 
 });
+
+
+function setup() {
+    // Create screen reader accessible description
+    textOutput();
+  
+    createCanvas(720, 400);
+  
+    // Use degrees as units for angles
+    // The arc() function uses angles
+    angleMode(DEGREES);
+  
+    // Draw a light gray background
+    background(220);
+  
+  
+  }
 

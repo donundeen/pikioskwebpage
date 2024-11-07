@@ -1,5 +1,5 @@
-let WEBSOCKET_PORT= 8099;
-let WEBSERVER_PORT = 8082;
+let WEBSOCKET_PORT= 8088;
+let WEBSERVER_PORT = 8080;
 
 $(function() {
 
@@ -13,8 +13,38 @@ $(function() {
 
 
 
-    // some note characters: 
-    // ♭ 𝅘𝅥𝅮𝅗𝅥°♭𝅘𝅥𝅗𝅥𝅗 𝄼 𝄽 
+    $(".sendmessage").on("click", function(evt){
+        console.log("clicked");
+        let context = $(evt.target).parent();
+        let address = $(".address", context).val();
+        if(address == "/screen/text"){
+            sendScreenText(context);
+        }
+        if(address == "/screen/p5"){
+            sendP5(context);
+        }
+        console.log(address);
+    })
+
+    function sendScreenText(context){
+        let address = $(".address", context).val();
+        let text =  $(".text", context).val();       
+        let data = {address: address,
+                    text: text};
+
+        message("adminmessage", data);
+    }
+
+    function sendP5(context){
+        $(".errormsg", context).empty();
+        let address = $(".address", context).val();
+        let p5 =  $(".p5", context).val();       
+        let data = {address: address,
+                    p5: p5};
+
+        message("adminmessage", data);
+    }    
+
 
     //  const ws = new WebSocket('ws://localhost:8080');
     //const ws = new WebSocket('ws://192.168.4.34:8080');
@@ -28,10 +58,7 @@ $(function() {
     ws.onopen = function() {
         wsready = true;
         console.log("opened " + ws.readyState);
-        message("getvoicelist",1);        
-        message("getperformancelist",1);
-        message("getscorelist",1);
-        message("ready", "READY NOW")
+        message("ready", "ADMIN READY NOW")
     };
 
     ws.onerror = function(msg){
@@ -45,19 +72,14 @@ $(function() {
     }
 
     ws.onmessage = function(event) {
-//        console.log("got message "+ event);
+        console.log("got message ", event);
         msg = JSON.parse(event.data);
-//        console.log(msg.address);
-
-        // this is the format. Change the messages as needed
-        if(msg.address == "score"){
-            updateScore(msg.data);
+        if(msg.address == "p5error"){
+            showP5Error(msg);
         }
+        console.log(msg.address);
+        console.log(msg);
 
-        if(msg.address == "curbeat"){
-            updateBeat(msg.data[0],msg.data[1],msg.data[2]);
-        }
-        // add message about adding a new instrument here
     }
 
     function message(address, data){
@@ -72,6 +94,11 @@ $(function() {
         }else{
             console.log("ws not ready");
         }
+    }
+
+    function showP5Error(msg){
+        console.log("p5error", msg.data);
+        $(".p5error").text("ERROR: " + msg.data.msg);
     }
 
 });

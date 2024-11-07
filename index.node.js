@@ -38,19 +38,18 @@ udpPort.open();
 udpPort.on("message", function (oscMsg) {
     // when an OSC messages comes in
     db.log("An OSC message just arrived!", oscMsg);
-    // pass the message to the orchestra, which controls all the instruments
-//    orchestra.parseOSC(oscMsg.address, oscMsg.args);
 
-    // announcing local instruments to create them in the orchestra
-    // NOTE: all localInstrument stuff is broken, needs updating
     routeFromOSC(oscMsg, "/screen/text", function(oscMsg, address){
 
         db.log(oscMsg);
-        let data = {msg : "hello",
-            text: "more text"};
         socket.sendMessage(oscMsg.address,oscMsg.simpleValue);    
-
     });
+    routeFromOSC(oscMsg, "/screen/p5", function(oscMsg, address){
+        db.log(oscMsg);
+        socket.sendMessage(oscMsg.address,oscMsg.simpleValue);    
+    });
+
+
 
 });
 
@@ -76,12 +75,28 @@ socket.setMessageReceivedCallback(function(msg){
     // getscore ask for the contents and name of the current score
     routeFromWebsocket(msg, "ready", function(msg){    
         
-        console.log("got reay message");
+        console.log("got ready message");
         let data = {msg : "hello",
                 text: "more text"};
         socket.sendMessage("hithere",data);    
     });
 
+    routeFromWebsocket(msg, "adminmessage", function(msg){    
+        
+        console.log("got admin message");
+        let data = msg;
+        socket.sendMessage(msg.address,data);    
+    });
+
+
+    routeFromWebsocket(msg, "toadminmessage", function(msg){    
+        
+        console.log("got toadmin message");
+        let data = msg;
+        socket.sendMessage(msg.address,data);    
+    });    
+
+    // get admin page messages to send to the screen
 });
 
 
