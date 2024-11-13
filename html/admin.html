@@ -8,12 +8,16 @@
         <link rel="stylesheet" href="./jquery-ui.theme.css">
     </head>
     <body>
-        screen admin
-
+        <h2>Public display screen.</h2>
+        <p>What you send from here shows up on a public display screen. Be respectful but have fun.</p>
         <div class="container">
             <div class="item p5">
                 <strong>Send P5.js</strong><a href="https://p5js.org/reference/" target="_blank">P5 Reference</a><BR>
-                <textarea rows="10" cols="50" class="data p5" name="p5" size="20">text("huh?", 150,250); // here's an example. try other stuff</textarea> 
+                <textarea rows="10" cols="50" class="data p5" name="p5" size="20">// here's an example. try other stuff
+// actually any javascript will work, not just p5
+
+text("look at me I'm coding!", 150,250); 
+                </textarea> 
                 <input type="hidden" class="address" value="/screen/p5"><BR>
                 <button class="sendmessage">send</button>
                 <BR>
@@ -21,10 +25,11 @@
             </div>
             <div class="item html">
                 <strong>Send HTML</strong><a href="https://www.w3schools.com/html/default.asp> target="_blank">HTML/CSS Reference</a><BR>
-                <textarea rows="10" cols="50" class="data html" name="html" size="20">
-                    <b style='position:absolute; top:250; left:300'>HTML is fun!</b>
-                    <!-- here's an example. Make sure to put the position information (top, left, position:absolute) 
-                     in the style attribute-->
+                <textarea rows="10" cols="50" class="data html" name="html" size="20"> <!-- here's an example. Make sure to put the position information (top, left, position:absolute) 
+                    in the style attribute-->
+
+<b style='position:absolute; top:250; left:300'>HTML is fun!</b>
+                   
                 </textarea> 
                 <input type="hidden" class="address" value="/screen/html"><BR>
                 <button class="sendmessage">send</button>

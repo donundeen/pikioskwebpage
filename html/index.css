@@ -4,4 +4,15 @@ html, body {
   }
   canvas {
     display: block;
+    z-index: 20;
+  }
+
+
+
+  .hackme {
+    z-index: 50;
+    position: absolute;
+    bottom: 0;
+    left:0;
+
   }
