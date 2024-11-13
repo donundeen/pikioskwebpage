@@ -61,9 +61,7 @@ $(function() {
                 console.log("p5 error", e);
                 let msg = {msg : e.message, p5code: p5, address : "p5error"};
                 message("toadminmessage", msg);
-            }
-            addHTML("<b style='position:absolute; top:250;left:400'>p5 added</b>");
- 
+            } 
         }
 
         if(msg.address == "/screen/html"){
@@ -114,9 +112,7 @@ $(function() {
                     let msg = {msg : e.message, fstring: fstring, func: func, p5json : p5json, address : "p5error"};
                     message("toadminmessage", msg);
                 }            
-    
             }
-            addHTML("<b style='position:absolute; top:250; left:300'>p5json added</b>");
         }
     }
 
@@ -165,6 +161,8 @@ function setup() {
   
 
     contentdiv = document.createElement("div");
+    contentdiv.setAttribute("id", "contentdiv");
+    contentdiv.classList.add("contentdiv");    
     contentdiv.style.position = "absolute";
     contentdiv.style.top = 0;
     contentdiv.style.lefft = 0;
