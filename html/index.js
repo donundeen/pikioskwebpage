@@ -1,6 +1,8 @@
 let WEBSOCKET_PORT= 8088;
 let WEBSERVER_PORT = 8080;
 
+let contentdiv = false;
+
 $(function() {
 
     console.log("starting");
@@ -60,7 +62,25 @@ $(function() {
                 let msg = {msg : e.message, p5code: p5, address : "p5error"};
                 message("toadminmessage", msg);
             }
+            addHTML("<b style='position:absolute; top:250;left:400'>p5 added</b>");
+ 
         }
+
+        if(msg.address == "/screen/html"){
+            console.log(msg);
+            // Draw square
+            // x, y, size
+            let html = msg.data.html;
+          //  square(40, 100, 200);
+            try{
+                addHTML(html);
+
+            }catch(e){
+                console.log("html error", e);
+                let msg = {msg : e.message, html: html, address : "p5error"};
+                message("toadminmessage", msg);
+            }
+        }        
 
         // try parsing a json object into a series of javascript function calls. maybe it will work?
         if(msg.address == "/screen/p5json"){
@@ -96,9 +116,18 @@ $(function() {
                 }            
     
             }
+            addHTML("<b style='position:absolute; top:250; left:300'>p5json added</b>");
         }
-
     }
+
+
+    function addHTML(htmlstring){
+        let newelem = document.createElement("div");
+        newelem.innerHTML = htmlstring;
+        newelem.style.position = "absolute";
+        contentdiv.append(newelem);
+    }
+
 
     function message(address, data){
 
@@ -127,7 +156,6 @@ function setup() {
     textOutput();
   
     createCanvas(screen.width, screen.height);
-  
     // Use degrees as units for angles
     // The arc() function uses angles
     angleMode(DEGREES);
@@ -135,6 +163,15 @@ function setup() {
     // Draw a light gray background
     background(240);
   
+
+    contentdiv = document.createElement("div");
+    contentdiv.style.position = "absolute";
+    contentdiv.style.top = 0;
+    contentdiv.style.lefft = 0;
+    contentdiv.style.height=screen.height;
+    contentdiv.style.width=screen.width;
+    document.body.append(contentdiv);
+
   
   }
 

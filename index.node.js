@@ -48,6 +48,10 @@ udpPort.on("message", function (oscMsg) {
         db.log(oscMsg);
         socket.sendMessage(oscMsg.address,oscMsg.simpleValue);    
     });
+    routeFromOSC(oscMsg, "/screen/html", function(oscMsg, address){
+        db.log(oscMsg);
+        socket.sendMessage(oscMsg.address,oscMsg.simpleValue);    
+    });
 
 
 

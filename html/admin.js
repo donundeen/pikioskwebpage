@@ -23,6 +23,9 @@ $(function() {
         if(address == "/screen/p5"){
             sendP5(context);
         }
+        if(address == "/screen/html"){
+            sendHTML(context);
+        }
         console.log(address);
     })
 
@@ -45,7 +48,15 @@ $(function() {
         message("adminmessage", data);
     }    
 
+    function sendHTML(context){
+        $(".errormsg", context).empty();
+        let address = $(".address", context).val();
+        let html =  $(".html", context).val();       
+        let data = {address: address,
+                    html: html};
 
+        message("adminmessage", data);
+    }      
     //  const ws = new WebSocket('ws://localhost:8080');
     //const ws = new WebSocket('ws://192.168.4.34:8080');
     //const ws = new WebSocket('ws://10.102.134.110:8080');
