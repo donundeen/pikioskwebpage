@@ -20,8 +20,8 @@ $(function() {
         if(address == "/screen/text"){
             sendScreenText(context);
         }
-        if(address == "/screen/p5"){
-            sendP5(context);
+        if(address == "/screen/js"){
+            sendJS(context);
         }
         if(address == "/screen/html"){
             sendHTML(context);
@@ -38,12 +38,12 @@ $(function() {
         message("adminmessage", data);
     }
 
-    function sendP5(context){
+    function sendJS(context){
         $(".errormsg", context).empty();
         let address = $(".address", context).val();
-        let p5 =  $(".p5", context).val();       
+        let js =  $(".js", context).val();       
         let data = {address: address,
-                    p5: p5};
+                    js: js};
 
         message("adminmessage", data);
     }    
@@ -85,8 +85,8 @@ $(function() {
     ws.onmessage = function(event) {
         console.log("got message ", event);
         msg = JSON.parse(event.data);
-        if(msg.address == "p5error"){
-            showP5Error(msg);
+        if(msg.address == "jsError"){
+            showJSError(msg);
         }
         console.log(msg.address);
         console.log(msg);
@@ -107,9 +107,9 @@ $(function() {
         }
     }
 
-    function showP5Error(msg){
-        console.log("p5error", msg.data);
-        $(".p5error").text("ERROR: " + msg.data.msg);
+    function showJSError(msg){
+        console.log("jsError", msg.data);
+        $(".jsError").text("ERROR: " + msg.data.msg);
     }
 
 });

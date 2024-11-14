@@ -40,7 +40,7 @@ $(function() {
     }
 
     ws.onmessage = function(event) {
-        console.log("got message ", event);
+        console.log("got onmessage ", event);
         msg = JSON.parse(event.data);
         console.log(msg.address);
         console.log(msg);
@@ -49,17 +49,17 @@ $(function() {
             screenText(msg.data);
 
         }
-        if(msg.address == "/screen/p5"){
+        if(msg.address == "/screen/js"){
             console.log(msg);
             // Draw square
             // x, y, size
-            let p5 = msg.data.p5;
+            let js = msg.data.js;
           //  square(40, 100, 200);
             try{
-                eval(p5);
+                eval(js);
             }catch(e){
-                console.log("p5 error", e);
-                let msg = {msg : e.message, p5code: p5, address : "p5error"};
+                console.log("js error", e);
+                let msg = {msg : e.message, jscode: js, address : "jsError"};
                 message("toadminmessage", msg);
             } 
         }
@@ -75,10 +75,39 @@ $(function() {
 
             }catch(e){
                 console.log("html error", e);
-                let msg = {msg : e.message, html: html, address : "p5error"};
+                let msg = {msg : e.message, html: html, address : "jsError"};
                 message("toadminmessage", msg);
             }
         }        
+
+        if(msg.address == "/screen/htmljs"){
+            console.log(msg);
+            // Draw square
+            // x, y, size
+            if(msg.data.html){
+                let html = msg.data.html;
+            //  square(40, 100, 200);
+                try{
+                    addHTML(html);
+
+                }catch(e){
+                    console.log("html error", e);
+                    let msg = {msg : e.message, html: html, address : "jsError"};
+                    message("toadminmessage", msg);
+                }
+            }
+            if(msg.data.js){
+                let js = msg.data.js;
+            //  square(40, 100, 200);
+                try{
+                    eval(js);
+                }catch(e){
+                    console.log("js error", e);
+                    let msg = {msg : e.message, jscode: js, address : "jsError"};
+                    message("toadminmessage", msg);
+                } 
+            }
+        }
 
         // try parsing a json object into a series of javascript function calls. maybe it will work?
         if(msg.address == "/screen/p5json"){

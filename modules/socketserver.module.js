@@ -76,7 +76,10 @@ let SocketServer = {
       address: address,
       data : data
     }
-    this.sockets.forEach(s => s.send(JSON.stringify(msg)));
+    this.sockets.forEach(s => {
+      console.log("socket sending");  
+      s.send(JSON.stringify(msg))
+    });
   },
 
   startWebServer(){

@@ -41,15 +41,23 @@ udpPort.on("message", function (oscMsg) {
 
     routeFromOSC(oscMsg, "/screen/text", function(oscMsg, address){
 
-        db.log(oscMsg);
+        db.log("/screen/text", oscMsg);
         socket.sendMessage(oscMsg.address,oscMsg.simpleValue);    
     });
     routeFromOSC(oscMsg, "/screen/p5", function(oscMsg, address){
-        db.log(oscMsg);
+        db.log("/screen/p5",oscMsg);
+        socket.sendMessage(oscMsg.address,oscMsg.simpleValue);    
+    });
+    routeFromOSC(oscMsg, "/screen/js", function(oscMsg, address){
+        db.log("/screen/js",oscMsg);
         socket.sendMessage(oscMsg.address,oscMsg.simpleValue);    
     });
     routeFromOSC(oscMsg, "/screen/html", function(oscMsg, address){
-        db.log(oscMsg);
+        console.log("/screen/html",oscMsg);
+        socket.sendMessage(oscMsg.address,oscMsg.simpleValue);    
+    });
+    routeFromOSC(oscMsg, "/screen/htmljs", function(oscMsg, address){
+        console.log("/screen/htmljs",oscMsg);
         socket.sendMessage(oscMsg.address,oscMsg.simpleValue);    
     });
 
