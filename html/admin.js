@@ -17,13 +17,13 @@ $(function() {
         console.log("clicked");
         let context = $(evt.target).parent();
         let address = $(".address", context).val();
-        if(address == "/screen/text"){
+        if(address == "/screen/text/"){
             sendScreenText(context);
         }
-        if(address == "/screen/js"){
+        if(address == "/screen/js/"){
             sendJS(context);
         }
-        if(address == "/screen/html"){
+        if(address == "/screen/html/"){
             sendHTML(context);
         }
         console.log(address);

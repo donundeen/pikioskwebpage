@@ -45,11 +45,11 @@ $(function() {
         console.log(msg.address);
         console.log(msg);
 
-        if(msg.address == "/screen/text"){
+        if(msg.address == "/screen/text/"){
             screenText(msg.data);
 
         }
-        if(msg.address == "/screen/js"){
+        if(msg.address == "/screen/js/"){
             console.log(msg);
             // Draw square
             // x, y, size
@@ -64,7 +64,7 @@ $(function() {
             } 
         }
 
-        if(msg.address == "/screen/html"){
+        if(msg.address == "/screen/html/"){
             console.log(msg);
             // Draw square
             // x, y, size
@@ -80,7 +80,7 @@ $(function() {
             }
         }        
 
-        if(msg.address == "/screen/htmljs"){
+        if(msg.address == "/screen/htmljs/"){
             console.log(msg);
             // Draw square
             // x, y, size
@@ -110,7 +110,7 @@ $(function() {
         }
 
         // try parsing a json object into a series of javascript function calls. maybe it will work?
-        if(msg.address == "/screen/p5json"){
+        if(msg.address == "/screen/p5json/"){
             let p5json = msg.data.p5json;
             for(let i = 0 ; i< p5json.length; i++){
                 let farray=[];                
