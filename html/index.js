@@ -59,7 +59,7 @@ $(function() {
                 eval(js);
             }catch(e){
                 console.log("js error", e);
-                let msg = {msg : e.message, jscode: js, address : "jsError"};
+                let msg = {msg : e.message, jscode: js, address : "jsError", error: e};
                 message("toadminmessage", msg);
             } 
         }
@@ -99,11 +99,12 @@ $(function() {
             if(msg.data.js){
                 let js = msg.data.js;
             //  square(40, 100, 200);
+            console.log("running js code ", js);
                 try{
                     eval(js);
                 }catch(e){
                     console.log("js error", e);
-                    let msg = {msg : e.message, jscode: js, address : "jsError"};
+                    let msg = {msg : e.message, jscode: js, address : "jsError", error: e};
                     message("toadminmessage", msg);
                 } 
             }
